@@ -22,8 +22,7 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     
-        tasks = makeTasks()
-        
+                
         tableView.dataSource = self
         tableView.delegate = self
  
@@ -62,24 +61,6 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     
     
-    func makeTasks() -> [Task] {
-     
-        let task1 = Task()
-        task1.name = "Program"
-        task1.important = true
-        
-        let task2 = Task()
-        task2.name = "Play with friends"
-        task2.important = false
-        
-        let task3 = Task()
-        task3.name = "Help people"
-        task3.important = true
-        
-        return [task1,task2,task3]
-
-        
-    }
     
     @IBAction func plusTapped(_ sender: Any) {
     
