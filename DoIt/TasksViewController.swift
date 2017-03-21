@@ -30,6 +30,13 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        getTasks()
+    }
+    
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
      return tasks.count
     }
@@ -70,7 +77,15 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     func getTasks() {
-        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+  
+        do {
+       tasks = try context.fetch(Task.fetchRequest()) as!
+            [Task]
+            print(tasks)
+        } catch {
+          print("Oops we have an error")
+        }
     }
     
     
