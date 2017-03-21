@@ -13,7 +13,6 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     @IBOutlet weak var tableView: UITableView!
     
     var tasks : [Task] = []
-    var selectedIndex = 0
     
     
     
@@ -32,6 +31,7 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 
     override func viewWillAppear(_ animated: Bool) {
         getTasks()
+        tableView.reloadData()
     }
     
     
@@ -45,9 +45,9 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let cell = UITableViewCell()
         let task = tasks[indexPath.row]
         if task.important {
-            cell.textLabel?.text = "❗️\(task.name)"
+            cell.textLabel?.text = "❗️\(task.name!)"
         } else {
-         cell.textLabel?.text = task.name
+         cell.textLabel?.text = task.name!
         }
         
         return cell
@@ -55,7 +55,7 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedIndex = indexPath.row
+  
         
         let task = tasks[indexPath.row]
         performSegue(withIdentifier: "selectTaskSegue", sender: task)
@@ -92,8 +92,8 @@ class TasksViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectTaskSegue"{
         let nextVC = segue.destination as! CompleteTaskViewController
-        nextVC.task = sender as! Task
-        nextVC.previousVC = self    
+        nextVC.task = sender as? Task
+       
             
         }
     
